@@ -23,10 +23,10 @@ const writeToFile = (fileName, data) => {
 };
 
 // function to initialize program
- function init() {
+//Asynchronous initialization to first load the questions file and then generate the markdown file
+async function init() {
 
-
-    const answers = inquirer.prompt(questions());
+    const answers = await inquirer.prompt(questions());
 
     // Generate markdown content using the collected data
     const markdownContent = generateMarkdown(answers);
