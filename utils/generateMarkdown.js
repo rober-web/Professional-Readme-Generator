@@ -8,10 +8,15 @@ function generateMarkdown(data) {
 
   const tableOfContents = (data) => {
     let tocContent = "";
-
+    let tocContentTitle = '## Table of Contents';;
     if (data) {
+      if(tocContent === "") {
+        tocContentTitle = '';
+      }
+      
       tocContent += `
-  ## Table of Contents
+
+  ${tocContentTitle}\n
   `;
       if (data.installation) {
         tocContent += `- [Installation](#installation)\n`;
@@ -47,7 +52,6 @@ function generateMarkdown(data) {
   if (data.installation) {
     theContent += `## Installation\n${data.installation}\n`;
   }
-
 
 
   if (data.usage) {
