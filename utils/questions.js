@@ -1,7 +1,10 @@
 // array of questions for user
 
+//request for the licenses information
+const licenses = require('./licenses');
 
 function questions(){
+
 
   return ([
     {
@@ -25,9 +28,10 @@ function questions(){
       message: "Describe how to use your project:",
     },
     {
-      type: "input",
+      type: "list",
       name: "license",
       message: "Define a license to your project:",
+      choices: licenses,//added choices as an array to select the license
     },
     {
       type: "input",
