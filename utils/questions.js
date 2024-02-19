@@ -14,6 +14,11 @@ function questions(){
     },
     {
       type: "input",
+      name: "emailAddress",
+      message: "Enter your email address:",
+    },
+    {
+      type: "input",
       name: "projectTitle",
       message: "Enter the project title:",
     },
