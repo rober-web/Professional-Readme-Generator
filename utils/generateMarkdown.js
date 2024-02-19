@@ -15,7 +15,7 @@ const licenses = require('./licenses');
   }
 
     // License section with dynamic badge
-    if (data.license) {
+    if (theContent !== "") {
       const selectedLicense = licenses.find(license => license.value === data.license);
       if (selectedLicense) {
         theContent += `${selectedLicense.badge}\n`;
@@ -55,7 +55,7 @@ const licenses = require('./licenses');
       if (data.usage) {
         tocContent += `- [Usage](#usage)\n`;
       }
-      if (data.license) {
+      if (data.license && theContent !== "") {
         tocContent += `- [License](#license)\n`;
       }
       if (data.contributing) {
@@ -88,9 +88,12 @@ const licenses = require('./licenses');
   if (data.usage) {
     theContent += `## Usage\n${data.usage}\n`;
   }
-
-  if (data.license) {
+  //Conditional statement to prevent the license to be printed when the content is empty
+  if ( (data.projectTitle !== "") && (data.description !== "") && (data.tableOfContents !== "") 
+    && (data.installation !== "") && (data.usage !== "") && (data.contributing !== "") && (data.tests !== "") && (data.githubName !== "") ) { 
     theContent += `## License\n${data.license}\n`;
+  }else{
+      theContent += '';
   }
 
   if (data.contributing) {
@@ -101,8 +104,8 @@ const licenses = require('./licenses');
     theContent += `## Tests\n${data.contributing}\n`;
   }
 
-  if (data.questions) {
-    theContent += `## Questions\n${data.questions}\n`;
+  if (data.githubName) {
+    theContent += `## Questions\n My Github: [${data.githubName}](https://github.com/${data.githubName})` ;
   }
 
   return theContent;
