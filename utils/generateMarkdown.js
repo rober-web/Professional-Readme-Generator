@@ -104,9 +104,21 @@ const licenses = require('./licenses');
     theContent += `## Tests\n${data.contributing}\n`;
   }
 
+  if(data.githubName  || data.emailAddress){
+    theContent += `## Questions\n`;
+  } 
+
   if (data.githubName) {
-    theContent += `## Questions\n My Github: [${data.githubName}](https://github.com/${data.githubName})` ;
+    theContent += `My Github: [${data.githubName}](https://github.com/${data.githubName})\n`;
+
   }
+  
+  if(data.emailAddress){
+
+      theContent += `\nFor additional questions you can reach me at: ${data.emailAddress}`;
+
+  }
+
 
   return theContent;
 }
