@@ -9,6 +9,11 @@ function questions(){
   return ([
     {
       type: "input",
+      name: "githubName",
+      message: "Enter your github username:",
+    },
+    {
+      type: "input",
       name: "projectTitle",
       message: "Enter the project title:",
     },
@@ -43,11 +48,7 @@ function questions(){
       name: "tests",
       message: "Inform tests output:",
     },
-    {
-      type: "input",
-      name: "questions",
-      message: "Questions:",
-    }
+
   ])
 
 } 
