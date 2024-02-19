@@ -1,5 +1,8 @@
 // function to generate markdown for README
 function generateMarkdown(data) {
+//request for the licenses information
+const licenses = require('./licenses');
+
 
   //Variable to contain the content of the readme file
   let theContent = "";
@@ -10,6 +13,14 @@ function generateMarkdown(data) {
   if (data.projectTitle) {
     theContent += `# ${data.projectTitle}\n`;
   }
+
+    // License section with dynamic badge
+    if (data.license) {
+      const selectedLicense = licenses.find(license => license.value === data.license);
+      if (selectedLicense) {
+        theContent += `${selectedLicense.badge}\n`;
+      }
+    }
 
   //The table of contents function will only be displayed if any of the content is filled by user
   const tableOfContents = (data) => {
