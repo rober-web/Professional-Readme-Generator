@@ -23,32 +23,21 @@ const licenses = require('./licenses');
     }
 
   //The table of contents function will only be displayed if any of the content is filled by user
+
+
   const tableOfContents = (data) => {
 
-    // Table of contents variable will start empty
+
     let tocContent = "";
 
-     /* Table of contents title variable will start  with its title by default
-     It only will be empty case tocContent variable remains empty */
-    let tocContentTitle = '## Table of Contents';
 
-    //Case any data is true, starts the condition scope
     if (data) {
 
-      //If no content is added
-      if(tocContent === "") {
 
-        //then table of contents does not display the title
-        tocContentTitle = '';
-      }
-      
-      /* Add data to tocContent if true
-      and print the table of contents title. 
-      The contents under the TBC will be displayed with anchors.*/
 
-      tocContent += `
-      ${tocContentTitle}\n
-`;
+      /* tocContent += `${tocContentTitle}\n`; */
+
+
       if (data.installation) {
         tocContent += `- [Installation](#installation)\n`;
       }
@@ -67,6 +56,9 @@ const licenses = require('./licenses');
       if (data.questions) {
         tocContent += `- [Questions](#questions)\n`;
       }
+/*       if( tocContent !== ""){
+        tocContent += `${tocContentTitle}\n`;
+      } */
 
     }
 
@@ -76,6 +68,19 @@ const licenses = require('./licenses');
   if (data.description) {
     theContent += `## Description\n${data.description}\n`;
   }
+
+
+
+  let tocContentTitle = '';
+
+  if((data.installation !=="") && (data.usage !== "") && (data.license !== "") 
+  && (data.license !=="") && (data.contributing !== "") && (data.tests !== "") && (data.questions !== "")){
+
+    tocContentTitle =`\n## Table of Contents\n`
+    theContent += tocContentTitle;
+  }
+
+
 
   /* Add Table of Contents using the separate function at the right position
      just after the description section */
