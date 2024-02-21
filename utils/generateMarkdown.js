@@ -1,43 +1,30 @@
 // function to generate markdown for README
 function generateMarkdown(data) {
-//request for the licenses information
-const licenses = require('./licenses');
+  // request for the licenses information
+  const licenses = require('./licenses');
 
-
-  //Variable to contain the content of the readme file
+  // Variable to contain the content of the readme file
   let theContent = "";
 
-   /* Added if statement to print only the content user decides to add to their README file
-   and ignore the ones they skipp on the prompt */
-
+  // Added if statement to print only the content user decides to add to their README file
+  // and ignore the ones they skip on the prompt
   if (data.projectTitle) {
     theContent += `# ${data.projectTitle}\n`;
   }
 
-    // License section with dynamic badge
-    if (theContent !== "") {
-      const selectedLicense = licenses.find(license => license.value === data.license);
-      if (selectedLicense) {
-        theContent += `${selectedLicense.badge}\n`;
-      }
+  // License section with dynamic badge
+  if (theContent !== "") {
+    const selectedLicense = licenses.find(license => license.value === data.license);
+    if (selectedLicense) {
+      theContent += `${selectedLicense.badge}\n`;
     }
+  }
 
-  //The table of contents function will only be displayed if any of the content is filled by user
-
-
+  // The table of contents function will only be displayed if any of the content is filled by the user
   const tableOfContents = (data) => {
-
-
     let tocContent = "";
 
-
     if (data) {
-
-
-
-      /* tocContent += `${tocContentTitle}\n`; */
-
-
       if (data.installation) {
         tocContent += `- [Installation](#installation)\n`;
       }
@@ -56,10 +43,6 @@ const licenses = require('./licenses');
       if (data.questions) {
         tocContent += `- [Questions](#questions)\n`;
       }
-/*       if( tocContent !== ""){
-        tocContent += `${tocContentTitle}\n`;
-      } */
-
     }
 
     return tocContent;
@@ -69,22 +52,13 @@ const licenses = require('./licenses');
     theContent += `## Description\n${data.description}\n`;
   }
 
+  // Add Table of Contents using the separate function at the right position
+  // just after the description section
+  const generatedTableOfContents = tableOfContents(data);
 
-
-  let tocContentTitle = '';
-
-  if((data.installation !=="") && (data.usage !== "") && (data.license !== "") 
-  && (data.license !=="") && (data.contributing !== "") && (data.tests !== "") && (data.questions !== "")){
-
-    tocContentTitle =`\n## Table of Contents\n`
-    theContent += tocContentTitle;
+  if (generatedTableOfContents.trim() !== "") {
+    theContent += `## Table of Contents\n${generatedTableOfContents}`;
   }
-
-
-
-  /* Add Table of Contents using the separate function at the right position
-     just after the description section */
-  theContent += tableOfContents(data);
 
   if (data.installation) {
     theContent += `## Installation\n${data.installation}\n`;
@@ -93,12 +67,11 @@ const licenses = require('./licenses');
   if (data.usage) {
     theContent += `## Usage\n${data.usage}\n`;
   }
-  //Conditional statement to prevent the license to be printed when the content is empty
-  if ( (data.projectTitle !== "") && (data.description !== "") && (data.tableOfContents !== "") 
-    && (data.installation !== "") && (data.usage !== "") && (data.contributing !== "") && (data.tests !== "") && (data.githubName !== "") ) { 
+
+  // Conditional statement to prevent the license from being printed when the content is empty
+  if (data.projectTitle && data.description && data.installation &&
+    data.usage && data.contributing && data.tests && data.githubName) {
     theContent += `## License\n${data.license}\n`;
-  }else{
-      theContent += '';
   }
 
   if (data.contributing) {
@@ -106,24 +79,20 @@ const licenses = require('./licenses');
   }
 
   if (data.tests) {
-    theContent += `## Tests\n${data.contributing}\n`;
+    theContent += `## Tests\n${data.tests}\n`;
   }
 
-  if(data.githubName  || data.emailAddress){
+  if (data.githubName || data.emailAddress) {
     theContent += `## Questions\n`;
-  } 
+  }
 
   if (data.githubName) {
     theContent += `My Github: [${data.githubName}](https://github.com/${data.githubName})\n`;
-
-  }
-  
-  if(data.emailAddress){
-
-      theContent += `\nFor additional questions you can reach me at: ${data.emailAddress}`;
-
   }
 
+  if (data.emailAddress) {
+    theContent += `\nFor additional questions, you can reach me at: ${data.emailAddress}`;
+  }
 
   return theContent;
 }
