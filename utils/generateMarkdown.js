@@ -52,7 +52,7 @@ function generateMarkdown(data) {
     theContent += `## Description\n${data.description}\n`;
   }
 
-  // Add Table of Contents using the separate function at the right position
+  // Added the Table of Contents using the separate function at the right position
   // just after the description section
   const generatedTableOfContents = tableOfContents(data);
 
@@ -81,7 +81,7 @@ function generateMarkdown(data) {
   if (data.tests) {
     theContent += `## Tests\n${data.tests}\n`;
   }
-
+ // Questions section will only be generated case either githubName or emailAddress become true
   if (data.githubName || data.emailAddress) {
     theContent += `## Questions\n`;
   }
